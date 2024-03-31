@@ -2,28 +2,39 @@ import pygame
 from pygame.locals import *
 import pymunk
 import pymunk.pygame_util
+import math
 
 WHITE = (255, 255, 255)
 FPS = 60
 
 # Class for the player's car
 class Car:
-    def __init__(self, space, x, y):
+    def __init__(self, space, x, y, mass):
         self.space = space
         self.body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
         self.body.position = x, y
         self.shape = pymunk.Poly.create_box(self.body, (30, 50))
         self.shape.friction = 0.5
+        self.body.mass = mass 
         self.space.add(self.body, self.shape)
 
-    def apply_force(self,force):
+    def apply_force(self, force):
         self.body.apply_force_at_local_point((0, force), (0, 0))
 
-    def turn_left(self, steering):
-        self.body.apply_force_at_local_point((steering, 0), (750, 0))
-    def turn_right(self, steering):
-        self.body.apply_force_at_local_point((steering, 0), (750, 0))
-    
+    def accelerate(self, force, mass):
+        self.body.apply_force_at_local_point((0, force), (0, 0)) 
+        force / self.body.mass
+
+    def turn_left(self):
+        angle = self.body.angle - math.pi / 16  
+        self.body.angle = angle
+        self.body.angular_velocity = 0
+
+    def turn_right(self):
+        angle = self.body.angle + math.pi / 16  
+        self.body.angle = angle
+        self.body.angular_velocity = 0
+
 # Class for walls
 class Wall:
     def __init__(self, space, x, y, width, height):
@@ -43,7 +54,7 @@ def main():
     space = pymunk.Space()
     space.gravity = (0, 0)
 
-    car = Car(space, 400, 300)
+    car = Car(space, 400, 300, 0.05)
 
     wall_top = Wall(space, 0, 0, 800, 10)
     wall_bottom = Wall(space, 0, 590, 800, 10)
@@ -58,20 +69,15 @@ def main():
                 run = False
             keys = pygame.key.get_pressed()
             if keys[K_UP]:
-                car.apply_force(-1000)
+                car.accelerate(-650, 0.05)
             elif keys[K_DOWN]:
-                car.apply_force(500)
-            else:
-                if car.body.velocity[1] > 0:
-                    car.apply_force(-100)
-                if car.body.velocity[1] < 0:
-                    car.apply_force(100)
+                car.accelerate(450, 0.05)
 
             if keys[K_LEFT]:
-                car.turn_left(-750)
+                car.turn_left()
             if keys[K_RIGHT]:
-                car.turn_right(750)
-       
+                car.turn_right()
+
         space.step(1 / 60.0)
         screen.fill(WHITE)
         space.debug_draw(draw_options)
