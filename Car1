@@ -20,9 +20,9 @@ class Car:
         self.body.apply_force_at_local_point((0, force), (0, 0))
 
     def turn_left(self, steering):
-        self.body.apply_force_at_local_point((steering, 0)), (-500, 0)
+        self.body.apply_force_at_local_point((steering, 0)), (-750, 0)
     def turn_right(self, steering):
-        self.body.apply_force_at_local_point((steering, 0), (500, 0))
+        self.body.apply_force_at_local_point((steering, 0), (750, 0))
     
 # Class for walls
 class Wall:
@@ -68,9 +68,9 @@ def main():
                     car.apply_force(100)
 
             if keys[K_LEFT]:
-                car.turn_left(-500)
+                car.turn_left(-750)
             if keys[K_RIGHT]:
-                car.turn_right(500)
+                car.turn_right(750)
        
         space.step(1 / 60.0)
         screen.fill(WHITE)
