@@ -20,7 +20,7 @@ class Car:
         self.body.apply_force_at_local_point((0, force), (0, 0))
 
     def turn_left(self, steering):
-        self.body.apply_force_at_local_point((steering, 0)), (750, 0)
+        self.body.apply_force_at_local_point((steering, 0), (750, 0))
     def turn_right(self, steering):
         self.body.apply_force_at_local_point((steering, 0), (750, 0))
     
