@@ -14,7 +14,7 @@ class Car:
         self.body = pymunk.Body(1, 100, body_type=pymunk.Body.DYNAMIC)
         self.body.position = x, y
         self.shape = pymunk.Poly.create_box(self.body, (30, 50))
-        self.shape.friction = 0.5
+        self.shape.friction = 200
         self.body.mass = mass 
         self.space.add(self.body, self.shape)
 
@@ -68,9 +68,9 @@ def main():
             keys = pygame.key.get_pressed()
 
             if keys[K_w]:
-                car.accelerate(-45, 0.5)
+                car.apply_force(-45)
             if keys[K_s]:
-                car.accelerate(45, 0.5)
+                car.apply_force(45)
 
             if keys[K_a]:
                 car.turn_left()
