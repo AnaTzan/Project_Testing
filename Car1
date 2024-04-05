@@ -71,9 +71,9 @@ def main():
             keys = pygame.key.get_pressed()
 
             if keys[K_w]:
-                car.accelerate(-50, 0.5)
+                car.accelerate(-45, 0.5)
             if keys[K_s]:
-                car.accelerate(50, 0.5)
+                car.accelerate(45, 0.5)
 
             if keys[K_a]:
                 car.turn_left()
