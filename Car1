@@ -24,6 +24,7 @@ class Car:
     def accelerate(self, force, mass):
         self.body.apply_force_at_local_point((0, force), (0, 0)) 
         force / self.body.mass
+        self.body.stop = self.body.apply_force_at_local_point((0, force), (0, 0)) == False
 
     def turn_left(self):
         angle = self.body.angle - math.pi / 16  
