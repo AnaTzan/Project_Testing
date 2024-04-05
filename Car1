@@ -24,15 +24,14 @@ class Car:
     def accelerate(self, force, mass):
         self.body.apply_force_at_local_point((0, force), (0, 0)) 
         force / self.body.mass
-        self.body.stop = self.body.apply_force_at_local_point((0, force), (0, 0)) == False
 
     def turn_left(self):
-        angle = self.body.angle - math.pi / 16  
+        angle = self.body.angle - math.pi / 30  
         self.body.angle = angle
         self.body.angular_velocity = 0
 
     def turn_right(self):
-        angle = self.body.angle + math.pi / 16  
+        angle = self.body.angle + math.pi / 30
         self.body.angle = angle
         self.body.angular_velocity = 0
 
@@ -71,14 +70,14 @@ def main():
 
             keys = pygame.key.get_pressed()
 
-            if keys[K_UP]:
-                car.accelerate(-50, 0.05)
-            if keys[K_DOWN]:
-                car.accelerate(50, 0.05)
+            if keys[K_w]:
+                car.accelerate(-50, 0.5)
+            if keys[K_s]:
+                car.accelerate(50, 0.5)
 
-            if keys[K_LEFT]:
+            if keys[K_a]:
                 car.turn_left()
-            if keys[K_RIGHT]:
+            if keys[K_d]:
                 car.turn_right()
 
         space.step(1 / 60.0)
@@ -91,4 +90,4 @@ def main():
     pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    main()   
