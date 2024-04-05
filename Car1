@@ -67,11 +67,13 @@ def main():
         for event in pygame.event.get():
             if event.type == QUIT:
                 run = False
+
             keys = pygame.key.get_pressed()
+
             if keys[K_UP]:
-                car.accelerate(-650, 0.05)
-            elif keys[K_DOWN]:
-                car.accelerate(450, 0.05)
+                car.accelerate(-50, 0.05)
+            if keys[K_DOWN]:
+                car.accelerate(50, 0.05)
 
             if keys[K_LEFT]:
                 car.turn_left()
