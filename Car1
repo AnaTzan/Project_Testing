@@ -18,12 +18,9 @@ class Car:
         self.body.mass = mass 
         self.space.add(self.body, self.shape)
 
+
     def apply_force(self, force):
         self.body.apply_force_at_local_point((0, force), (0, 0))
-
-    def accelerate(self, force, mass):
-        self.body.apply_force_at_local_point((0, force), (0, 0)) 
-        force / self.body.mass
 
     def turn_left(self):
         angle = self.body.angle - math.pi / 30  
