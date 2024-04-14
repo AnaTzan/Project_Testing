@@ -65,17 +65,18 @@ def main():
             if event.type == QUIT:
                 run = False
 
-            keys = pygame.key.get_pressed()
+        # Better control from the car.
+        keys = pygame.key.get_pressed()
 
-            if keys[K_w]:
-                car.apply_force(-45)
-            if keys[K_s]:
-                car.apply_force(45)
+        if keys[K_w]:
+            car.apply_force(-45)
+        if keys[K_s]:
+            car.apply_force(45)
 
-            if keys[K_a]:
-                car.turn_left()
-            if keys[K_d]:
-                car.turn_right()
+        if keys[K_a]:
+            car.turn_left()
+        if keys[K_d]:
+            car.turn_right()
 
         space.step(1 / 60.0)
         screen.fill(WHITE)
